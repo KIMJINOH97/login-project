@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
                 unique: true, // 하나만
             },
             password: {
-                type: DataTypes.STRING(50),
+                type: DataTypes.STRING(100),
                 allowNull: true, // 카카오톡 로그인 시 필요X
             },
             nick: {
@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
                 unique: true, // 닉네임 하나만
             },
             age: {
-                type: DataTypes.INT,
+                type: DataTypes.STRING(10),
                 allowNull: false, // 필수
             },
             provider: {

@@ -6,6 +6,8 @@ const nunjucks = require('nunjucks');
 const morgan = require('morgan');
 const flash = require('connect-flash');
 const { sequelize } = require('./models');
+const passport = require('passport');
+const passportConfig = require('./passport');
 
 require('dotenv').config();
 
@@ -14,6 +16,8 @@ const indexRouter = require('./routes/index');
 const authRouter = require('./routes/auth');
 
 const app = express();
+sequelize.sync();
+passportConfig(passport);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'html');
 nunjucks.configure('views', {
@@ -46,6 +50,8 @@ app.use(
 
 // 1회성 메시지
 app.use(flash());
+app.use(passport.initialize());
+app.use(passport.session());
 
 // 라우터
 app.use('/', indexRouter);
